@@ -2,7 +2,7 @@ const User = require('../models/user');
 const { isAuthorized } = require('../utils/jwt');
 
 const getUsers = async (req, res) => {
-  if (!isAuthorized(req.headers.authorization)) return res.status(401);
+  if (!isAuthorized(req.headers.authorization)) return res.status(401).send({ message: 'Not Authorized' });
 
   return User.find({})
     .then(users => res.status(200).send(users))
